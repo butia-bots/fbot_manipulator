@@ -59,6 +59,31 @@ from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 REV: float = 2 * np.pi
 """One complete revolution of a joint (2*pi)"""
 
+""" 
+    This are the pre saved poses for the arm. When call the state Move2Target it is necessary to pass 
+    a value corresponding to the arm pose desired. The pose passed there should be declared here in arm_pose dict. 
+    After this, when we call the InterbotixManipulatorXS to get the arm like bot.arm ... 
+    we can call the function go_to_desired_pose and pass the desire pose. 
+    The joint order is: [waist, shoulder, elbow, wrist_angle, wrist_rotate]
+"""
+
+ARM_POSE = {
+    "Sleep": [0, -1.88, 1.5, 0.8, 0],
+    "Sleep_Manip": [-1.555456519126892, -1.88, 1.5, 0.27458256483078003, 0],
+    "SleepBag": [-1.555456519126892, -1.88, 1.5, 0.27458256483078003, 1.4956313371658325],
+    "SleepBagHigh": [-1.5677284002304077, -1.4204663038253784, 0.7823302149772644, 0.6227962374687195, 1.540116786956787],
+    "PrePick": [-0.0015, -0.0322, 1.3023, -1.3268, 0.07669],
+    "Home": [0, 0, 0, 0, 0],
+    "HomeRotate": [0, 0, 0, 0, 1.4956313371658325],
+    "PrePickUp": [-0.02454369328916073, 1.6137478351593018, -0.04141748324036598, 0.09357283264398575, -0.04908738657832146],
+    "PrePickUpVertical": [-0.02454369328916073, 1.6137478351593018, -0.04141748324036598, 0.09357283264398575, 1.4956313371658325],
+    "PrePickUpRotate": [-0.02454369328916073, 1.6137478351593018, -0.04141748324036598, -1.4956313371658325, 1.4956313371658325],
+    "PrePickGarbage": [-0.006135923322290182, 0.7271069288253784, 0.07976700365543365, 0.8329516053199768, 1.5339808464050293],
+    "PickGarbage": [-0.01840776950120926, 1.6873788833618164, -0.3466796576976776, 0.40957286953926086, 1.5355148315429688],
+    "DropGarbage": [0.013805827125906944, 0.6810874938964844, -0.7025632262229919, 1.7257283926010132, 1.5355148315429688],
+    "LookGarbage": [-0.004601942375302315, 0.029145635664463043, -0.22396120429039001, 1.8054953813552856, 0.02147573232650757]
+}
+
 
 class InterbotixManipulatorXS:
     """Standalone Module to control an Interbotix Arm and Gripper."""
@@ -278,6 +303,25 @@ class InterbotixArmXSInterface:
             )
         if self.iterative_update_fk:
             self._update_Tsb()
+
+    def go_to_desired_pose(
+        self,
+        pose_name,
+        moving_time=None,
+        accel_time=None,
+        blocking=True
+    ) -> None:
+        """
+        Command the arm to go to a pre-saved pose.
+
+        :param pose_name: name of the pre-saved pose
+        :param moving_time: (optional) duration in seconds that the robot should move
+        :param accel_time: (optional) duration in seconds that that robot should spend
+            accelerating/decelerating (must be less than or equal to half the moving_time)
+        :param blocking: (optional) whether the function should wait to return control to the user
+            until the robot finishes moving
+        """
+        self._publish_commands(ARM_POSE[pose_name], moving_time, accel_time, blocking)
 
     def set_trajectory_time(
         self,
