@@ -8,9 +8,8 @@ groups:
 
 singles:
   gripper:
-    operating_mode: pwm
-    profile_type: time
+    operating_mode: linear_position
+    profile_type: velocity
     profile_velocity: 131
     profile_acceleration: 15
     torque_enable: true
-    pwm_limit: 880
