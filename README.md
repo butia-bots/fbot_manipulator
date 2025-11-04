@@ -5,7 +5,7 @@
 ![python](https://img.shields.io/badge/python-3.10-blue?style=for-the-badsge&logo=python)
 ![ROS2](https://img.shields.io/badge/ROS2-Humble-blue?style=for-the-badsge&logo=ros)
 
-[Overview](#overview)
+[Overview](#overview) • [Architecture](#architecture) • [Installation](#installation) • [Usage](#usage) • [fbot_manipulator topics and services](#fbot_manipulator-topics-and-services) • [Contributing](#contributing)
 
 </div>
 
@@ -80,5 +80,31 @@ fbot_manipulator/
    #Run the node to save the arm position
    ros2 run fbot_manipulator_tools manipulator_saver
    ```
+## fbot_manipulator topics and services 
 
 
+### Topics
+
+| Topic | Type | Description |
+|-------|------|-------------|
+| `/wx200/commands/joint_group` | [`JointGroupCommand.msg`](interbotix_ros_core/interbotix_ros_xseries/interbotix_xs_msgs/msg/JointGroupCommand.msg) | Command Group Joints |
+| `/wx200/commands/joint_single` | [`JointSingleCommand.msg`](interbotix_ros_core/interbotix_ros_xseries/interbotix_xs_msgs/msg/JointSingleCommand.msg) | Command Single Joint |
+| `/wx200/commands/joint_trajectory` | [`JointTrajectoryCommand.msg`](interbotix_ros_core/interbotix_ros_xseries/interbotix_xs_msgs/msg/JointTrajectoryCommand.msg) | Trajectory to The Desired Joint(s) |
+| `/wx200/joint_states` | [`JointState.msg`](https://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/JointState.html) |Describe Controlled Joints |
+| `/wx200/robot_description` | [`String.msg`](https://docs.ros.org/en/melodic/api/std_msgs/html/msg/String.html) | wx200 Arm Description |
+
+### Services
+
+| Service | Type | Description |
+|---------|------|-------------|
+| `/wx200/torque_enable` | [`interbotix_xs_msgs/srv/TorqueEnable`](https://docs.trossenrobotics.com/interbotix_xsarms_docs/ros_interface/ros2/overview/xs_msgs.html) | Disable Arm Torque |
+| `/wx200/reboot_motors` | [`interbotix_xs_msgs/srv/Reboot`](https://docs.trossenrobotics.com/interbotix_xsarms_docs/ros_interface/ros2/overview/xs_msgs.html) | Restart Arm Motors |
+
+---
+
+## Contributing
+
+1. Create a feature branch (`git checkout -b feat/amazing-feature`)
+2. Commit your changes (`git commit -m 'Add amazing feature'`)
+3. Push to the branch (`git push origin feat/amazing-feature`)
+4. Open a Pull Request
