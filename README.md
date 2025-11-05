@@ -21,10 +21,10 @@
 ```
 fbot_manipulator/
 ├── 📝config/ #Custom arm manipulator positions are recorded here
-├── ⚙️fbot_manipulator_tools/ #Has the tools developed by the team to facilitate the use of the arm
+├── ⚙️fbot_manipulator_tools/ #This package contains the manipulator tools developed by FBOT
 ├── interbotix_ros_core/ #Interbotix Packages that contain the actuator for all the interbotix arms
 ├── interbotix_ros_manipulators/ #Packages to control the various types of arms sold at Trossen Robotics
-├── interbotix_ros_toolboxes #Contains support level ROS wrappers and robot interface modules that are used in many of our robotic platforms at Trossen Robotics.
+├── interbotix_ros_toolboxes #Contains support level ROS wrappers and robot interface modules that are used in many robotic platforms at Trossen Robotics.
 ├── moveit_visual_tools #Helper functions for displaying and debugging MoveIt data in Rviz via published markers, trajectories, and MoveIt collision objects.
 ├── LICENSE 
 ├── 📝README.md #This short summary
