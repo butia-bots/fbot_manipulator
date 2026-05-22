@@ -217,10 +217,12 @@ return_type XSHardwareInterface::write(const rclcpp::Time &, const rclcpp::Durat
     pub_group->publish(group_msg);
     joint_commands_prev = group_msg.cmd;
   }
-  if (gripper_cmd_prev != gripper_msg.cmd) {
-    pub_gripper->publish(gripper_msg);
-    gripper_cmd_prev = gripper_msg.cmd;
-  }
+   // Gripper is driven in PWM mode by gripper_pwm_bridge via commands/joint_single;
+    // don't let the ros2_control HW interface fight it on the same topic.
+    // if (gripper_cmd_prev != gripper_msg.cmd) {
+    //   pub_gripper->publish(gripper_msg);
+    //   gripper_cmd_prev = gripper_msg.cmd;
+    // }
   return return_type::OK;
 }
 

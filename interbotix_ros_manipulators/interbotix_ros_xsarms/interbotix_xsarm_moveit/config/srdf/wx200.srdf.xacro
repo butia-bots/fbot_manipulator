@@ -54,12 +54,12 @@
         <joint name="wrist_rotate" value="0" />
     </group_state>
     <group_state name="Grasping" group="interbotix_gripper">
-        <joint name="left_finger" value="0.015" />
-        <joint name="right_finger" value="-0.015" />
+        <joint name="left_finger" value="0.017" />
+        <joint name="right_finger" value="-0.017" />
     </group_state>
     <group_state name="Released" group="interbotix_gripper">
-        <joint name="left_finger" value="0.037" />
-        <joint name="right_finger" value="-0.037" />
+        <joint name="left_finger" value="0.030" />
+        <joint name="right_finger" value="-0.030" />
     </group_state>
     <group_state name="Home" group="interbotix_gripper">
         <joint name="left_finger" value="0.0195" />

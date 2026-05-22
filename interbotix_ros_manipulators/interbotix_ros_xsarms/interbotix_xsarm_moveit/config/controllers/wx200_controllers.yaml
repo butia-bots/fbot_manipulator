@@ -1,6 +1,6 @@
 controller_names:
   - /wx200/arm_controller
-  - /wx200/gripper_controller
+  - /wx200/gripper_pwm_bridge
 
 /wx200/arm_controller:
   action_ns: follow_joint_trajectory
@@ -12,10 +12,11 @@ controller_names:
     - elbow
     - wrist_angle
     - wrist_rotate
-
-/wx200/gripper_controller:
-  action_ns: follow_joint_trajectory
-  type: FollowJointTrajectory
+      
+/wx200/gripper_pwm_bridge:
+  action_ns: gripper_cmd
+  type: GripperCommand
   default: true
   joints:
     - left_finger
+

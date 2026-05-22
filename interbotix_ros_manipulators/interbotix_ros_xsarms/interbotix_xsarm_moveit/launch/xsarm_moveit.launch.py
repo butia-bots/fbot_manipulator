@@ -126,6 +126,11 @@ def launch_setup(context, *args, **kwargs):
         }
     }
 
+    move_group_capabilities = {
+      'capabilities': 'move_group/ExecuteTaskSolutionCapability',
+    }
+
+
     ompl_planning_pipeline_yaml_file = load_yaml(
         'interbotix_xsarm_moveit', 'config/ompl_planning.yaml'
     )
@@ -208,6 +213,7 @@ def launch_setup(context, *args, **kwargs):
             planning_scene_monitor_parameters,
             joint_limits,
             sensor_parameters,
+            move_group_capabilities,
         ],
         remappings=remappings,
         output={'both': 'screen'},
